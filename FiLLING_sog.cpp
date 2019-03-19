@@ -4,41 +4,52 @@
 #include<process.h>
 using namespace std;
 struct Node {
-	int num;
+	string num;
 	Node *next;
-
-	Node(int x) {
+	Node(string x) {
 		num = x;
 		next = 0;
 	}
 };
 Node *first;
-void addAtbeg(int x) {
+void addAtbeg(char *a) {
 	//cout << "add at beg";
-	Node *ptr = new Node(x);
+	ifstream io;
+	string ch;
+	io.open(a);
+	getline(io, ch);
+	//int k = stoi(ch);
+	Node *ptr = new Node(ch);
 	if (first == 0) {
 		first = ptr;
 	}
-	else {
+	else 
+	{
 		ptr->next = first;
 		first = ptr;
 	}
+	io.close();
 }
 
-void disp() {
-	int x;
+void disp(char *a) {
+	char r[100];
+	ofstream out;
+	cin.getline(r, 100);
+	out.open(a);
+	
 	Node *temp = first;
 	while (temp)
 	{
-	cout<<" "<< temp->num;
+	cout<<" "<< temp->num<<"->";
+	out <<temp->num<<"->";
 		temp = temp->next;
 		//return x;
 	}
+	out.close();
 	//return x;
 }
 void main(int argc, char *argv[])
 {
-	ofstream out;
 	//ifstream in;
 	//string ch;
 	char r[100];
@@ -53,18 +64,16 @@ void main(int argc, char *argv[])
 	//cout << ch << endl;
 	//in.close();
 	//int c = atoi(argv[1])
-	for(int i=0;i<5;i++)
-	addAtbeg(i);
+	//for(int i=0;i<5;i++)
+	addAtbeg(argv[1]);
 	//addAtbeg(argv[2]);
 	
-	out.open(argv[1]);
 	//out << "\n Check ur file";
 //	int x = disp();
-	//int y = disp();
-	cin.getline(r,100);
-	out<<disp();
+	disp(argv[2]);
+	
+	//out<<disp();
 	//out << y;
 	//out >> ch;
-	out.close();
 	
 }
